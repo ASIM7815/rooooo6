@@ -620,34 +620,70 @@ document.querySelectorAll('.movie-card').forEach(card => {
     });
 });
 
-// ===== VIDEO PLAYER FOR HIT 3 =====
+// ===== VIDEO PLAYER =====
+const player = document.getElementById('videoPlayer');
+const video = document.getElementById('mainVideo');
+const playBtn = document.getElementById('playBtn');
+const muteBtn = document.getElementById('muteBtn');
+const timeDisplay = document.getElementById('time');
+const progressFilled = document.getElementById('progressFilled');
+const controls = document.getElementById('controls');
+let hideTimeout;
+
 function openVideoPlayer() {
-    const videoModal = document.getElementById('videoModal');
-    const video = document.getElementById('modalVideoPlayer');
-    
-    videoModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    video.play().catch(err => {
-        console.error('Video play error:', err);
-        showNotification('Error playing video. Please try again.');
-    });
+    player.style.display = 'block';
+    video.play();
 }
 
-function closeVideoPlayer() {
-    const videoModal = document.getElementById('videoModal');
-    const video = document.getElementById('modalVideoPlayer');
-    
+function closePlayer() {
+    player.style.display = 'none';
     video.pause();
     video.currentTime = 0;
-    
-    videoModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
 }
 
-// Make functions globally available
-window.playVideo = playVideo;
-window.playYouTubeVideo = playYouTubeVideo;
-window.closeVideoModal = closeVideoModal;
+function togglePlay() {
+    video.paused ? video.play() : video.pause();
+    playBtn.textContent = video.paused ? '▶' : '⏸';
+}
+
+function toggleMute() {
+    video.muted = !video.muted;
+    muteBtn.textContent = video.muted ? '🔇' : '🔊';
+}
+
+function toggleFullscreen() {
+    document.fullscreenElement ? document.exitFullscreen() : player.requestFullscreen();
+}
+
+function seek(e) {
+    const bar = e.currentTarget;
+    const percent = e.offsetX / bar.offsetWidth;
+    video.currentTime = percent * video.duration;
+}
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+video.addEventListener('timeupdate', () => {
+    progressFilled.style.width = (video.currentTime / video.duration * 100) + '%';
+    timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+});
+
+video.addEventListener('play', () => playBtn.textContent = '⏸');
+video.addEventListener('pause', () => playBtn.textContent = '▶');
+
+player.addEventListener('mousemove', () => {
+    controls.style.opacity = '1';
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => !video.paused && (controls.style.opacity = '0'), 2000);
+});
+
 window.openVideoPlayer = openVideoPlayer;
-window.closeVideoPlayer = closeVideoPlayer;
+window.closePlayer = closePlayer;
+window.togglePlay = togglePlay;
+window.toggleMute = toggleMute;
+window.toggleFullscreen = toggleFullscreen;
+window.seek = seek;

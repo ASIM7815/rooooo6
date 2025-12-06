@@ -173,19 +173,22 @@
         </div>
     </footer>
 
-    <!-- Video Modal -->
-    <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-            <button class="modal-close" onclick="closeVideoPlayer()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6L18 18"/>
-                </svg>
-            </button>
-            <div class="video-player-wrapper" id="videoPlayerWrapper">
-                <video id="modalVideoPlayer" class="modal-video" controls controlsList="nodownload">
-                    <source src="https://storage.cloud.google.com/asimsaadz/HIT.The.Third.Case.2025.1080p.NF.WEB-DL.DUAL.DDP5.1.x264-Vegamovies.is.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+    <!-- Video Player -->
+    <div class="video-player" id="videoPlayer">
+        <button class="close-btn" onclick="closePlayer()">✕</button>
+        <video id="mainVideo" onclick="togglePlay()">
+            <source src="https://storage.cloud.google.com/asimsaadz/HIT.The.Third.Case.2025.1080p.NF.WEB-DL.DUAL.DDP5.1.x264-Vegamovies.is.mp4" type="video/mp4">
+        </video>
+        <div class="controls" id="controls">
+            <div class="progress-bar" onclick="seek(event)">
+                <div class="progress-filled" id="progressFilled"></div>
+            </div>
+            <div class="controls-bottom">
+                <button onclick="togglePlay()" id="playBtn">▶</button>
+                <span id="time">0:00 / 0:00</span>
+                <div class="spacer"></div>
+                <button onclick="toggleMute()" id="muteBtn">🔊</button>
+                <button onclick="toggleFullscreen()">⛶</button>
             </div>
         </div>
     </div>

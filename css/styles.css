@@ -729,112 +729,95 @@ body {
     font-size: 12px;
 }
 
-/* ===== VIDEO MODAL ===== */
-.video-modal {
+/* ===== VIDEO PLAYER ===== */
+.video-player {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    inset: 0;
+    background: #000;
     z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
 }
 
-.video-modal.active {
-    display: flex;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.video-modal-content {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    animation: scaleIn 0.4s ease;
-}
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.modal-close {
+.close-btn {
     position: absolute;
-    top: -40px;
-    right: 0;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 24px;
     width: 40px;
     height: 40px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: none;
     border-radius: 50%;
-    color: var(--text-white);
     cursor: pointer;
+    z-index: 10;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+#mainVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 40px 20px 20px;
+    transition: opacity 0.3s;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-filled {
+    height: 100%;
+    background: #e50914;
+    width: 0;
+    transition: width 0.1s;
+}
+
+.controls-bottom {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: all var(--transition-speed) ease;
+    gap: 15px;
 }
 
-.modal-close:hover {
-    background-color: var(--primary-color);
-    transform: rotate(90deg);
+.controls-bottom button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.2s;
 }
 
-.video-player {
-    position: relative;
-    width: 100%;
-    background-color: var(--bg-dark);
-    border-radius: 5px;
-    overflow: hidden;
-    aspect-ratio: 16/9;
+.controls-bottom button:hover {
+    transform: scale(1.1);
 }
 
-.video-player #youtubePlayer {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+#time {
+    color: white;
+    font-size: 14px;
 }
 
-.video-player video,
-.video-player iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.video-player-wrapper {
-    position: relative;
-    width: 100%;
-    background-color: var(--bg-dark);
-    border-radius: 5px;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-}
-
-.modal-video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    outline: none;
+.spacer {
+    flex: 1;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */

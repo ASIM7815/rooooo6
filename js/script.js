@@ -620,7 +620,34 @@ document.querySelectorAll('.movie-card').forEach(card => {
     });
 });
 
+// ===== VIDEO PLAYER FOR HIT 3 =====
+function openVideoPlayer() {
+    const videoModal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideoPlayer');
+    
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    video.play().catch(err => {
+        console.error('Video play error:', err);
+        showNotification('Error playing video. Please try again.');
+    });
+}
+
+function closeVideoPlayer() {
+    const videoModal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideoPlayer');
+    
+    video.pause();
+    video.currentTime = 0;
+    
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
 // Make functions globally available
 window.playVideo = playVideo;
 window.playYouTubeVideo = playYouTubeVideo;
 window.closeVideoModal = closeVideoModal;
+window.openVideoPlayer = openVideoPlayer;
+window.closeVideoPlayer = closeVideoPlayer;

@@ -25,7 +25,6 @@ const ccBtn = document.getElementById('ccBtn');
 let controlsTimeout;
 let isPlaying = false;
 let isFullscreen = false;
-let hideUI = false;
 
 // ===== UTILITY FUNCTIONS =====
 function formatTime(seconds) {
@@ -47,7 +46,7 @@ function showControls() {
     
     clearTimeout(controlsTimeout);
     
-    if (isPlaying && !hideUI) {
+    if (isPlaying) {
         controlsTimeout = setTimeout(() => {
             controlsContainer.classList.add('hide');
             headerOverlay.classList.add('hide');
@@ -56,20 +55,11 @@ function showControls() {
     }
 }
 
-function hideControls() {
-    if (isPlaying) {
-        controlsContainer.classList.add('hide');
-        headerOverlay.classList.add('hide');
-        playerContainer.style.cursor = 'none';
-    }
-}
-
 function updatePlayButton() {
     const playIcon = '<path fill="currentColor" d="M8 5v14l11-7z"/>';
     const pauseIcon = '<path fill="currentColor" d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>';
     
     playPauseBtn.querySelector('svg').innerHTML = isPlaying ? pauseIcon : playIcon;
-    bigPlayBtn.querySelector('svg').innerHTML = playIcon;
     
     if (isPlaying) {
         bigPlayBtn.classList.add('hidden');
@@ -81,7 +71,9 @@ function updatePlayButton() {
 // ===== PLAY/PAUSE FUNCTIONALITY =====
 function togglePlay() {
     if (video.paused) {
-        video.play();
+        video.play().catch(err => {
+            console.error('Play error:', err);
+        });
     } else {
         video.pause();
     }
@@ -186,7 +178,6 @@ function updateVolumeIcon() {
 fullscreenBtn.addEventListener('click', () => {
     if (!document.fullscreenElement) {
         playerContainer.requestFullscreen().catch(() => {
-            // Fallback for browsers that don't support fullscreen API
             playerContainer.webkitRequestFullscreen?.();
         });
     } else {
@@ -198,11 +189,6 @@ fullscreenBtn.addEventListener('click', () => {
 
 document.addEventListener('fullscreenchange', () => {
     isFullscreen = !!document.fullscreenElement;
-    updateFullscreenButton();
-});
-
-document.addEventListener('webkitfullscreenchange', () => {
-    isFullscreen = !!document.webkitFullscreenElement;
     updateFullscreenButton();
 });
 
@@ -219,16 +205,6 @@ video.addEventListener('click', togglePlay);
 
 backBtn.addEventListener('click', () => {
     window.history.back();
-});
-
-settingsBtn.addEventListener('click', () => {
-    console.log('Settings clicked');
-    // Add settings panel functionality here
-});
-
-ccBtn.addEventListener('click', () => {
-    console.log('Subtitles clicked');
-    // Add subtitles functionality here
 });
 
 // ===== KEYBOARD SHORTCUTS =====
@@ -273,22 +249,6 @@ document.addEventListener('keydown', (e) => {
                 video.currentTime = Math.min(video.duration, video.currentTime + 10);
                 showControls();
                 break;
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-                if (video.duration) {
-                    const percent = parseInt(e.code.slice(-1)) / 10;
-                    video.currentTime = percent * video.duration;
-                    showControls();
-                }
-                break;
             case 'Escape':
                 if (document.fullscreenElement) {
                     document.exitFullscreen();
@@ -300,7 +260,15 @@ document.addEventListener('keydown', (e) => {
 
 // ===== MOUSE/TOUCH CONTROLS =====
 playerContainer.addEventListener('mousemove', showControls);
-playerContainer.addEventListener('mouseleave', hideControls);
+playerContainer.addEventListener('mouseleave', () => {
+    if (isPlaying) {
+        setTimeout(() => {
+            controlsContainer.classList.add('hide');
+            headerOverlay.classList.add('hide');
+            playerContainer.style.cursor = 'none';
+        }, 1000);
+    }
+});
 playerContainer.addEventListener('touchstart', showControls);
 playerContainer.addEventListener('touchmove', showControls);
 
@@ -309,8 +277,27 @@ playerContainer.addEventListener('dblclick', () => {
     fullscreenBtn.click();
 });
 
+// ===== VIDEO ERROR HANDLING =====
+video.addEventListener('error', (e) => {
+    console.error('Video Error:', video.error?.code);
+    console.error('Error message:', video.error?.message);
+    loadingSpinner.classList.remove('show');
+});
+
+// ===== VIDEO LOAD EVENTS =====
+video.addEventListener('loadstart', () => {
+    console.log('Video loading started');
+    loadingSpinner.classList.add('show');
+});
+
+video.addEventListener('canplay', () => {
+    console.log('Video can play');
+    loadingSpinner.classList.remove('show');
+});
+
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Player initialized');
     updatePlayButton();
     updateVolumeIcon();
     updateFullscreenButton();
@@ -319,15 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     video.volume = 0.8;
     volumeSlider.value = 80;
     
-    // Show controls on load
     showControls();
-    
-    // Auto-hide controls after 3 seconds if playing
-    setTimeout(() => {
-        if (isPlaying) {
-            hideControls();
-        }
-    }, 3000);
 });
 
 // Handle video end
@@ -336,36 +315,3 @@ video.addEventListener('ended', () => {
     updatePlayButton();
     showControls();
 });
-});
-
-document.addEventListener('keydown', (e) => {
-    switch(e.key) {
-        case ' ':
-            e.preventDefault();
-            togglePlay();
-            break;
-        case 'ArrowLeft':
-            video.currentTime -= 5;
-            break;
-        case 'ArrowRight':
-            video.currentTime += 5;
-            break;
-        case 'ArrowUp':
-            video.volume = Math.min(1, video.volume + 0.1);
-            volumeSlider.value = video.volume * 100;
-            break;
-        case 'ArrowDown':
-            video.volume = Math.max(0, video.volume - 0.1);
-            volumeSlider.value = video.volume * 100;
-            break;
-        case 'f':
-            fullscreenBtn.click();
-            break;
-        case 'm':
-            volumeBtn.click();
-            break;
-    }
-});
-
-loadingSpinner.classList.add('show');
-showControls();

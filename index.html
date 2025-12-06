@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RAOUFz - Stream unlimited movies and TV shows">
+    <title>RAOUFz - Watch Movies & TV Shows Online</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        const GOOGLE_API_KEY = 'AIzaSyAQ.Ab8RN6I0N6rhLFkqrAwDlFiJgt-t96y0bPJk6l8ZZuz3IMW4_g';
+    </script>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1 class="logo">RAOUFz</h1>
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#series" class="nav-link">TV Shows</a>
+                    <a href="#movies" class="nav-link">Movies</a>
+                    <a href="#new" class="nav-link">New & Popular</a>
+                    <a href="#mylist" class="nav-link">My List</a>
+                    <a href="#browse" class="nav-link">Browse by Languages</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <button class="search-btn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15.5 15.5M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="notifications">
+                    <button class="notification-btn" aria-label="Notifications">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <button class="user-btn">
+                        <img src="https://i.pravatar.cc/40?img=12" alt="User" class="user-avatar">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 11L3 6H13L8 11Z"/>
+                        </svg>
+                    </button>
+                    <div class="user-dropdown">
+                        <div class="dropdown-item">
+                            <img src="https://i.pravatar.cc/32?img=12" alt="Profile">
+                            <span>John Doe</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <img src="https://i.pravatar.cc/32?img=25" alt="Profile">
+                            <span>Kids</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-link">Account</a>
+                        <a href="#" class="dropdown-link">Help Center</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-link">Sign out of RAOUFz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <img src="sceen.jpg" alt="HIT 3 - The Third Case" class="hero-image hero-image-desktop">
+            <img src="h.jpg" alt="HIT 3 - The Third Case" class="hero-image hero-image-mobile">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badges">
+                <span class="badge-n18">18+</span>
+                <span class="badge-top10">#1 Thriller Series</span>
+            </div>
+            <h2 class="hero-title">HIT 3: The Third Case</h2>
+            <p class="hero-description">
+                A gripping thriller that delves into the darkest corners of investigation and deception. Experience intense suspense and jaw-dropping twists in this critically acclaimed crime drama that keeps you on the edge of your seat.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="window.location.href='player.html'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5V19L19 12L8 5Z"/>
+                    </svg>
+                    <span>Play</span>
+                </button>
+                <button class="btn btn-secondary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>More Info</span>
+                </button>
+            </div>
+            <div class="hero-meta">
+                <span class="hero-year">2025</span>
+                <span class="hero-rating">★ 9.2</span>
+                <span class="hero-seasons">Full Movie</span>
+                <span class="hero-genre">Crime • Thriller • Mystery</span>
+            </div>
+        </div>
+        <div class="hero-audio-control">
+            <button class="audio-toggle" id="audioToggle" aria-label="Toggle audio">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 5L6 9H2V15H6L11 19V5Z"/>
+                    <path d="M15.54 8.46C16.4774 9.39764 17.0039 10.6692 17.0039 11.995C17.0039 13.3208 16.4774 14.5924 15.54 15.53" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 8H6V12H9V21H13V12H16L17 8H13V6.5C13 5.948 13.448 5.5 14 5.5H17V2H14C11.243 2 9 4.243 9 7V8Z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="4" fill="#141414"/>
+                        <circle cx="18" cy="6" r="1.5" fill="#141414"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10C2.38 10 2.38 10 2.38 10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.46 14.34 5.08 14.39 4.69 14.39C4.42 14.39 4.15 14.36 3.89 14.31C4.43 16 6 17.26 7.89 17.29C6.43 18.45 4.58 19.13 2.56 19.13C2.22 19.13 1.88 19.11 1.54 19.07C3.44 20.29 5.70 21 8.12 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.58 7.19C21.43 6.59 20.96 6.12 20.37 5.97C18.88 5.59 12 5.59 12 5.59C12 5.59 5.12 5.59 3.63 5.97C3.04 6.12 2.57 6.59 2.42 7.19C2.04 8.67 2.04 12 2.04 12C2.04 12 2.04 15.33 2.42 16.81C2.57 17.41 3.04 17.88 3.63 18.03C5.12 18.41 12 18.41 12 18.41C12 18.41 18.88 18.41 20.37 18.03C20.96 17.88 21.43 17.41 21.58 16.81C21.96 15.33 21.96 12 21.96 12C21.96 12 21.96 8.67 21.58 7.19Z"/>
+                        <path d="M10 15V9L15.5 12L10 15Z" fill="#141414"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <a href="#">Audio Description</a>
+                    <a href="#">Investor Relations</a>
+                    <a href="#">Legal Notices</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Help Center</a>
+                    <a href="#">Jobs</a>
+                    <a href="#">Cookie Preferences</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Gift Cards</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Corporate Information</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">Media Center</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+            <button class="service-code">Service Code</button>
+            <p class="copyright">© 2024 RAOUFz, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="modal-close" onclick="closeVideoModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6L18 18"/>
+                </svg>
+            </button>
+            <div class="video-player" id="videoPlayerContainer">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
